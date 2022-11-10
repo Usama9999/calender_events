@@ -6,8 +6,6 @@ import 'utils/app_theme_input_dec.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // checking of user is already logged in
 
   runApp(const MyApp());
 }

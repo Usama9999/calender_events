@@ -37,6 +37,7 @@ class GetEventController extends GetxController {
   }
 
   void prompt(String url) async {
+    log(url);
     launchUrl(Uri.parse(url));
   }
 

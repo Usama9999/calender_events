@@ -19,8 +19,7 @@ class _CalendarAppState extends State<CalendarApp>
   @override
   void initState() {
     controller.tabController = TabController(length: 2, vsync: this);
-    // get user local data
-    // controller.getData();
+
     super.initState();
   }
 
