@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:googleapis/calendar/v3.dart';
 import 'package:intl/intl.dart';
 
-import '../../controllers/calenderController.dart';
+import '../../controllers/calender_controller.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
 
