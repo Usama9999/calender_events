@@ -1,4 +1,4 @@
-import 'package:calendar_events/screens/main_app.dart';
+import 'package:calendar_events/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Calender App',
         theme: AppTheme.data(),
-        home: const CalendarApp(),
+        home: const PinScreen(),
       );
     });
   }

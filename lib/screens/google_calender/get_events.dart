@@ -1,10 +1,9 @@
 import 'package:calendar_events/controllers/get_event_controller.dart';
+import 'package:calendar_events/models/events.dart';
 import 'package:calendar_events/utils/constants.dart';
 import 'package:calendar_events/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:googleapis/calendar/v3.dart' as c;
-import 'package:intl/intl.dart';
 
 class GetMyEvents extends StatefulWidget {
   const GetMyEvents({super.key});
@@ -26,43 +25,60 @@ class _GetMyEventsState extends State<GetMyEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<GetEventController>(builder: (value) {
-        return ListView.builder(
-            padding: const EdgeInsets.all(10),
-            itemCount: value.event.length,
-            itemBuilder: (context, index) {
-              c.Event event = value.event[index];
-              return Card(
-                color: AppConstants.white,
-                child: ListTile(
-                  title: Text(
-                    event.summary!,
-                    style: headingText(14).copyWith(color: Colors.black),
-                  ),
-                  subtitle: Column(children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Start at: ',
-                          style: headingText(14).copyWith(color: Colors.black),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: Column(
+            children: [
+              const Text(
+                'Events',
+                style: TextStyle(color: Colors.white, fontSize: 22),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: ListView.builder(
+                    padding: const EdgeInsets.all(10),
+                    itemCount: value.event.length,
+                    itemBuilder: (context, index) {
+                      Events event = value.event[index];
+                      return Card(
+                        color: AppConstants.white,
+                        child: ListTile(
+                          title: Text(
+                            event.name,
+                            style:
+                                headingText(14).copyWith(color: Colors.black),
+                          ),
+                          subtitle: Column(children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Start at: ',
+                                  style: headingText(14)
+                                      .copyWith(color: Colors.black),
+                                ),
+                                Text(event.start),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Ends at: ',
+                                  style: headingText(14)
+                                      .copyWith(color: Colors.black),
+                                ),
+                                Text(event.end),
+                              ],
+                            ),
+                          ]),
                         ),
-                        Text(
-                            '${DateFormat.yMEd().format(event.start!.dateTime!)} at ${DateFormat.jm().format(event.start!.dateTime!)}'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Ends at: ',
-                          style: headingText(14).copyWith(color: Colors.black),
-                        ),
-                        Text(
-                            '${DateFormat.yMEd().format(event.end!.dateTime!)} at ${DateFormat.jm().format(event.end!.dateTime!)}'),
-                      ],
-                    ),
-                  ]),
-                ),
-              );
-            });
+                      );
+                    }),
+              ),
+            ],
+          ),
+        );
       }),
     );
   }

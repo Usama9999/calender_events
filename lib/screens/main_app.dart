@@ -1,8 +1,8 @@
+import 'package:calendar_events/controllers/get_event_controller.dart';
 import 'package:calendar_events/controllers/main_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'google_calender/create_event.dart';
 import 'google_calender/get_events.dart';
 
 class CalendarApp extends StatefulWidget {
@@ -15,6 +15,7 @@ class CalendarApp extends StatefulWidget {
 class _CalendarAppState extends State<CalendarApp>
     with SingleTickerProviderStateMixin {
   var controller = Get.put(CalenderAppController());
+  var eventController = Get.put(GetEventController());
 
   @override
   void initState() {
@@ -27,37 +28,18 @@ class _CalendarAppState extends State<CalendarApp>
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(builder: (context, mainSize) {
-        return SafeArea(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    icon: const Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    )),
-                Expanded(child: _tabBar()),
-              ],
-            ),
-            GetBuilder<CalenderAppController>(builder: (value) {
-              return Visibility(
-                visible: value.tabIndex == 0,
-                child: const Expanded(child: CreateEvent()),
-              );
-            }),
-            GetBuilder<CalenderAppController>(builder: (value) {
-              return Visibility(
-                visible: value.tabIndex == 1,
-                child: const Expanded(child: GetMyEvents()),
-              );
-            }),
-          ],
-        ));
+        return RefreshIndicator(
+          onRefresh: eventController.getEvents,
+          child: SafeArea(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GetBuilder<CalenderAppController>(builder: (value) {
+                return const Expanded(child: GetMyEvents());
+              }),
+            ],
+          )),
+        );
       }),
     );
   }
