@@ -164,7 +164,7 @@
 //                   BroadcastMessage(
 //                       name:
 //                           "de.kevlatus.flutter_broadcasts_example.demo_action",
-//                       data: {'key': 'usama'}),
+//                       data: {'key': ''}),
 //                 );
 //                 // if (startDate == null ||
 //                 //     endDate == null ||
